@@ -1,6 +1,9 @@
 package main
 
 import(
+"encoding/json"
+"io/ioutil"
+"os"
 "strings"
 "fmt")
 
@@ -27,11 +30,23 @@ import(
 func main(){
 	// small sample list of valid words. This list have to SORTED alphabetical order from A to Z
 	// use a dictionary API if this was for commercial operation to check if a word is a valid English word
-	wordList := []string{"bat", "bog", "bot", "bow", "cat", "cog", "cot", "cow", "dog"};
+	// wordList := []string{"bat", "bog", "bot", "bow", "cat", "cog", "cot", "cow", "dog"};
+jsonFile, err := os.Open("english.json")
+	defer jsonFile.Close()
+	if err != nil{
+		fmt.Println(err)
+	}
 
+	byteValue, _ := ioutil.ReadAll(jsonFile)
 
-    inputA := "bat";
-    inputB := "dog";
+  var data map[string]interface{}
+
+	json.Unmarshal(byteValue, &data)
+
+	
+
+    inputA := "cat";
+    inputB := "jog";
 	
 	startWord := inputA;
 	endWord := inputB;
@@ -39,26 +54,40 @@ func main(){
 
 	//check if the startWord is valid English word.
 	// use a dictionary API if this was for commercial operation to check if a word is a valid English word
-	if( binarySearch(startWord, wordList, 0, len(wordList) - 1) >= 0){
-		resultArray = append( resultArray, startWord);
-	}
-
+	// if( binarySearch(startWord, wordList, 0, len(wordList) - 1) >= 0){
+	// 	resultArray = append( resultArray, startWord);
+	// }
+	formatStartWord := strings.ToUpper(string(startWord[0])) + startWord[1:] 
+	_,exist := data[formatStartWord]
+if( exist ){
+	resultArray = append(resultArray, startWord);
+}
 	//check in between startWord and endWord
 	// use a dictionary API if this was for commercial operation to check if a word is a valid English word
 	possibleWord := startWord
 	for i:= 1; i < len(endWord); i++{
 		possibleWord = strings.Replace(possibleWord, startWord[i:i+1], endWord[i:i+1], 1)
-		if( binarySearch(possibleWord, wordList, 0, len(wordList)  - 1) >= 0){
+		// if( binarySearch(possibleWord, wordList, 0, len(wordList)  - 1) >= 0){
+		// 	resultArray = append(resultArray, possibleWord);
+		// }
+		formatPossibleWord  :=  strings.ToUpper(string(possibleWord[0])) + possibleWord[1:] 
+		_,exist := data[formatPossibleWord]
+		if(exist){
 			resultArray = append(resultArray, possibleWord);
 		}
 	}
 
 	//check if endWord is valid English word
 	// use a dictionary API if this was for commercial operation to check if a word is a valid English word
-	if( binarySearch(endWord, wordList, 0, len(wordList) - 1) >= 0){
-		resultArray = append( resultArray, endWord);
+	// if( binarySearch(endWord, wordList, 0, len(wordList) - 1) >= 0){
+	// 	resultArray = append( resultArray, endWord);
 
-	}
+	// }
+	formatEndWord := strings.ToUpper(string(endWord[0])) + endWord[1:] 
+	_,existEndWord := data[formatEndWord]
+if( existEndWord ){
+	resultArray = append(resultArray, endWord);
+}
 
 	fmt.Println("resultArray ", resultArray)
 }
