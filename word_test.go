@@ -19,7 +19,7 @@ if len(dictionary) == 0{
 
 func Test_validWords_1(t *testing.T){
 	resultArr := validWords("bat", "cow")
-	expectedArr := []string{"bat", "bot", "bow", "cow"}
+	expectedArr := []interface{}{"bat", "bot", "bow", "cow"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -30,7 +30,7 @@ func Test_validWords_1(t *testing.T){
 
 func Test_validWords_2(t *testing.T){
 	resultArr := validWords("cat", "dog")
-	expectedArr := []string{"cat", "cog", "cot", "dog"}
+	expectedArr := []reflect.Value{"cat", "cog", "cot", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -41,7 +41,7 @@ func Test_validWords_2(t *testing.T){
 
 func Test_validWords_SwitchOrder(t *testing.T){
 	resultArr := validWords("dog", "cat")
-	expectedArr := []string{"cat", "cog", "cot", "dog"}
+	expectedArr := []reflect.Value{"cat", "cog", "cot", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -52,7 +52,7 @@ func Test_validWords_SwitchOrder(t *testing.T){
 
 func Test_validWords_UnequalStrings(t *testing.T){
 	resultArr := validWords("battle", "dog")
-	expectedArr := []string{"battle", "bottle", "dog"}
+	expectedArr := []reflect.Value{"battle", "bottle", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid. ")
 		t.Error("your answer:", resultArr)
@@ -63,7 +63,7 @@ func Test_validWords_UnequalStrings(t *testing.T){
 
 func Test_validWords_UnequalStrings_2(t *testing.T){
 	resultArr := validWords("dog", "horse")
-	expectedArr := []string{"dog", "dor", "horse"}
+	expectedArr := []reflect.Value{"dog", "dor", "horse"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -74,9 +74,9 @@ func Test_validWords_UnequalStrings_2(t *testing.T){
 
 func Test_validWords_UnequalStrings_more(t *testing.T){
 	resultArr := validWords("cat", "hopeful")
-	expectedArr := []string{"cat", "cop", "cot", "hopeful"}
+	expectedArr := []reflect.Value{"cat", "cop", "cot", "hopeful"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
-		t.Error("answers is invalid")
+		t.Fatalf("answers is invalid")
 		t.Error("your answer:", resultArr)
 		t.Error("expected answer:", expectedArr)
 	}

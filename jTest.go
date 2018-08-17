@@ -1,6 +1,7 @@
 package main
 
 import(
+"reflect"
 "sync"
 "sort"
 "encoding/json"
@@ -25,7 +26,7 @@ func openFile(fileName string) map[string]interface{}{
 }
 
 
-func validWords(startWord string, endWord string) []string{
+func validWords(startWord string, endWord string) []reflect.Value{
 var wg sync.WaitGroup
 dictionary := openFile("english.json")
 
@@ -79,20 +80,17 @@ if( existEndWord ){
 wg.Wait()
 
 //put only keys of map into array to get unique valid words only. no duplicate
-resultArray := []string{}
-for k,_ := range resultMap{
- 	resultArray = append(resultArray, k)
- }
+resultArray  := reflect.ValueOf(resultMap).MapKeys()
 // sort it from a to z alphabetical order
 sort.Slice(resultArray, func(i, j int) bool {
-    return resultArray[i] < resultArray[j]
+    return resultArray[i].Interface().(string) < resultArray[j].Interface().(string) 
 })
 
-return resultArray;
+return resultArray ;
 
 }
 
 func main(){
-	fmt.Println( validWords("cat", "hopeful"))
+	fmt.Println( validWords("cat", "dog"))
 }
 
