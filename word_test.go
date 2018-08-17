@@ -13,13 +13,12 @@ if len(dictionary) == 0{
 	t.Error("dictionary is empty")
 }
 }
-//checking file type in Go
-// check if os.Open() work
 
 
-func Test_validWords_1(t *testing.T){
+
+func Test_validWords_equalStrings1(t *testing.T){
 	resultArr := validWords("bat", "cow")
-	expectedArr := []interface{}{"bat", "bot", "bow", "cow"}
+	expectedArr := []string{"bat", "bot", "bow", "cow"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -28,9 +27,9 @@ func Test_validWords_1(t *testing.T){
 }
 
 
-func Test_validWords_2(t *testing.T){
+func Test_validWords_equalStrings2(t *testing.T){
 	resultArr := validWords("cat", "dog")
-	expectedArr := []reflect.Value{"cat", "cog", "cot", "dog"}
+	expectedArr := []string{"cat", "cog", "cot", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -39,9 +38,9 @@ func Test_validWords_2(t *testing.T){
 }
 
 
-func Test_validWords_SwitchOrder(t *testing.T){
+func Test_validWords_SwitchAlphabeticalOrder(t *testing.T){
 	resultArr := validWords("dog", "cat")
-	expectedArr := []reflect.Value{"cat", "cog", "cot", "dog"}
+	expectedArr := []string{"cat", "cog", "cot", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -50,9 +49,9 @@ func Test_validWords_SwitchOrder(t *testing.T){
 }
 
 
-func Test_validWords_UnequalStrings(t *testing.T){
+func Test_validWords_UnequalStrings_1(t *testing.T){
 	resultArr := validWords("battle", "dog")
-	expectedArr := []reflect.Value{"battle", "bottle", "dog"}
+	expectedArr := []string{"battle", "bottle", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid. ")
 		t.Error("your answer:", resultArr)
@@ -63,7 +62,7 @@ func Test_validWords_UnequalStrings(t *testing.T){
 
 func Test_validWords_UnequalStrings_2(t *testing.T){
 	resultArr := validWords("dog", "horse")
-	expectedArr := []reflect.Value{"dog", "dor", "horse"}
+	expectedArr := []string{"dog", "dor", "horse"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Error("answers is invalid")
 		t.Error("your answer:", resultArr)
@@ -72,9 +71,9 @@ func Test_validWords_UnequalStrings_2(t *testing.T){
 }
 
 
-func Test_validWords_UnequalStrings_more(t *testing.T){
+func Test_validWords_UnequalStrings_3(t *testing.T){
 	resultArr := validWords("cat", "hopeful")
-	expectedArr := []reflect.Value{"cat", "cop", "cot", "hopeful"}
+	expectedArr := []string{"cat", "cop", "cot", "hopeful"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
 		t.Fatalf("answers is invalid")
 		t.Error("your answer:", resultArr)
