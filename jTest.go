@@ -79,7 +79,7 @@ if( existEndWord ){
 // then just put the waitGroup.Wait() here for all those goroutine returning valid words
 wg.Wait()
 
-//put only keys of map into array to get unique valid words only. no duplicate
+//Try to OPTIMIZE CODE using reflect. It works for Go code but fail unit Test due to reflect.Value type
 resultArray  := reflect.ValueOf(resultMap).MapKeys()
 // sort it from a to z alphabetical order
 sort.Slice(resultArray, func(i, j int) bool {
