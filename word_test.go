@@ -17,7 +17,7 @@ if len(dictionary) == 0{
 // check if os.Open() work
 
 
-func Test_validWords_1(t *testing.T){
+func Test_validWords_equalStrings1(t *testing.T){
 	resultArr := validWords("bat", "cow")
 	expectedArr := []string{"bat", "bot", "bow", "cow"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
@@ -28,7 +28,7 @@ func Test_validWords_1(t *testing.T){
 }
 
 
-func Test_validWords_2(t *testing.T){
+func Test_validWords_equalStrings2(t *testing.T){
 	resultArr := validWords("cat", "dog")
 	expectedArr := []string{"cat", "cog", "cot", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
@@ -39,7 +39,7 @@ func Test_validWords_2(t *testing.T){
 }
 
 
-func Test_validWords_SwitchOrder(t *testing.T){
+func Test_validWords_SwitchAlphabeticalOrder(t *testing.T){
 	resultArr := validWords("dog", "cat")
 	expectedArr := []string{"cat", "cog", "cot", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
@@ -50,7 +50,7 @@ func Test_validWords_SwitchOrder(t *testing.T){
 }
 
 
-func Test_validWords_UnequalStrings(t *testing.T){
+func Test_validWords_UnequalStrings_1(t *testing.T){
 	resultArr := validWords("battle", "dog")
 	expectedArr := []string{"battle", "bottle", "dog"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
@@ -72,7 +72,7 @@ func Test_validWords_UnequalStrings_2(t *testing.T){
 }
 
 
-func Test_validWords_UnequalStrings_more(t *testing.T){
+func Test_validWords_UnequalStrings_3(t *testing.T){
 	resultArr := validWords("cat", "hopeful")
 	expectedArr := []string{"cat", "cop", "cot", "hopeful"}
 	if !reflect.DeepEqual(resultArr, expectedArr){
